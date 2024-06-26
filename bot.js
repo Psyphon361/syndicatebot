@@ -18,13 +18,6 @@ const message = process.env.MESSAGE;
 // Log when the bot starts
 console.log('Bot has been started...');
 
-// // Schedule the message to be sent every 4 hours
-// const job = schedule.scheduleJob('0 */4 * * *', function(){
-//   chatIds.forEach(chatId => {
-//     bot.sendMessage(chatId, message);
-//   });
-// });
-
 // Schedule the message to be sent every 30 seconds
 const job = schedule.scheduleJob(process.env.TIME_INTERVAL, function(){
   chatIds.forEach(chatId => {
