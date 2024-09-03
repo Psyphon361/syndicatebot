@@ -17,22 +17,28 @@ const bnbChatid = process.env.BNB_GROUP_CHAT_ID;
 const plsInterval = process.env.PLS_TIME_INTERVAL;
 const bnbInterval = process.env.BNB_TIME_INTERVAL;
 
+// Image path or URL (You can use a local path or a URL)
+const imagePath = './imgs/the_directorate.jpg'; // Local file path
 const message = process.env.MESSAGE;
 
-// Log when the bot starts
-console.log('Bot has been started...');
+// Function to send a message with an image
+function sendImageWithCaption(chatId) {
+    bot.sendPhoto(chatId, imagePath, { caption: message }).catch(err => {
+        console.error(`Failed to send image to chat ID ${chatId}:`, err);
+    });
+}
 
-// // Schedule the message to be sent to the PLS group at the specified interval
-// schedule.scheduleJob(plsInterval, function() {
-//     bot.sendMessage(plsChatid, message);
-// });
-
-// // Schedule the message to be sent to the BNB group at the specified interval
-// schedule.scheduleJob(bnbInterval, function() {
-//     bot.sendMessage(bnbChatid, message);
-// });
-
-// Schedule the message to be sent to the test group at the specified interval
-schedule.scheduleJob(process.env.TEST_TIME_INTERVAL, function() {
-    bot.sendMessage(process.env.TEST_GROUP_CHAT_ID, message);
+// Schedule the message with image to be sent to the PLS group at the specified interval
+schedule.scheduleJob(plsInterval, function () {
+    sendImageWithCaption(plsChatid);
 });
+
+// Schedule the message with image to be sent to the BNB group at the specified interval
+schedule.scheduleJob(bnbInterval, function () {
+    sendImageWithCaption(bnbChatid);
+});
+
+// Schedule the message with image to be sent to the test group at the specified interval
+// schedule.scheduleJob(process.env.TEST_TIME_INTERVAL, function () {
+//     sendImageWithCaption(process.env.TEST_GROUP_CHAT_ID);
+// });
