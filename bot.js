@@ -22,12 +22,17 @@ const message = process.env.MESSAGE;
 // Log when the bot starts
 console.log('Bot has been started...');
 
-// Schedule the message to be sent to the PLS group at the specified interval
-schedule.scheduleJob(plsInterval, function() {
-    bot.sendMessage(plsChatid, message);
-});
+// // Schedule the message to be sent to the PLS group at the specified interval
+// schedule.scheduleJob(plsInterval, function() {
+//     bot.sendMessage(plsChatid, message);
+// });
 
-// Schedule the message to be sent to the BNB group at the specified interval
-schedule.scheduleJob(bnbInterval, function() {
-    bot.sendMessage(bnbChatid, message);
+// // Schedule the message to be sent to the BNB group at the specified interval
+// schedule.scheduleJob(bnbInterval, function() {
+//     bot.sendMessage(bnbChatid, message);
+// });
+
+// Schedule the message to be sent to the test group at the specified interval
+schedule.scheduleJob(process.env.TEST_TIME_INTERVAL, function() {
+    bot.sendMessage(process.env.TEST_GROUP_CHAT_ID, message);
 });
